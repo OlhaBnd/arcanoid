@@ -27,8 +27,18 @@ class Area():
     def fill(self):                                    # Малює прямокутник у вікні гри
         pygame.draw.rect(mw, self.fill_color, self.rect)
 
+
     def collidepoint(self, x, y):                      # Перевірка зіткнення з точкою (наприклад, мишкою)
         return self.rect.collidepoint(x, y)
 
     def colliderect(self, rect):                       # Перевірка зіткнення з іншим прямокутником
         return self.rect.colliderect(rect)
+
+
+class Picture(Area):
+    def __init__(self, filename, x=0, y=0, width=10, height=10):
+        Area.__init__(self, x=x, y=y, width=width, height=height, color=None)  # Викликаємо конструктор батьківського класу
+        self.image = pygame.image.load(filename)        # Завантажуємо зображення з файлу
+
+    def draw(self):                                     # Виводить зображення у вікно на позицію прямокутника
+        mw.blit(self.image, (self.rect.x, self.rect.y))
